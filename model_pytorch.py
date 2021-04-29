@@ -40,7 +40,7 @@ class IAN(torch.nn.Module):
         aspect_inputs = func(aspect_inputs) #change some elements to 0 to reduce overfitting 
 
 
-        context_inputs = torch.index_select(self.embedding_matrix, 0, contexts)
+        context_inputs = torch.index_select(input = torch.tensor(self.embedding_matrix), dim = 0, index = contexts.long().flatten())
         context_inputs = context_inputs.type(torch.FloatTensor)
         context_inputs = func(context_inputs)
  
