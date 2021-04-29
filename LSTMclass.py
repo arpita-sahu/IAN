@@ -8,6 +8,7 @@ class lstm_model(torch.nn.Module):
     super().__init__()
     self.num_layers = 1
     self.sig = sig
+    self.hidden = n_hidden
     self.lstm = torch.nn.LSTM(input_size = embedding_dim, hidden_size = n_hidden, batch_first = True)
     self.sigmoid = torch.nn.Sigmoid()
     self.lstm_weight = torch.nn.init.xavier_uniform_(self.lstm.all_weights[0][0]) #weight of the lstm needs to be passed as a parameter to the xavier uniform function
@@ -22,8 +23,8 @@ class lstm_model(torch.nn.Module):
 
     #LSTMCell = same as LSTM except the number of layers is always 1 
 
-    h_0 = Variable(torch.zeros(self.num_layers, x.size(0), n_hidden)) #hidden state
-    c_0 = Variable(torch.zeros(self.num_layers, x.size(0), n_hidden))
+    h_0 = Variable(torch.zeros(self.num_layers, x.size(0), self.hidden)) #hidden state
+    c_0 = Variable(torch.zeros(self.num_layers, x.size(0), self.hidden))
     output, (h,c) = self.lstm(x, (h_0, c_0))
     out = hn.view(-1, self.hidden_size) #reshaping data 
 
