@@ -54,6 +54,7 @@ def run(model, train_data, test_data):
         iterator.make_initializer(train_data)
         for _ in range(math.floor(train_data_size / batch_size)):
             data = iterator.get_next()
+            print("data = ", data)
             with tf.GradientTape() as tape:
                 predict, labels = model(data, dropout=0.5)
                 loss_t = tf.nn.softmax_cross_entropy_with_logits_v2(logits=predict, labels=labels)
