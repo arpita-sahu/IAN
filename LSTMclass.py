@@ -22,8 +22,8 @@ class lstm_model(torch.nn.Module):
 
     #LSTMCell = same as LSTM except the number of layers is always 1 
 
-    h_0 = Variable(torch.zeros(self.num_layers, x.size(0), self.hidden_size)) #hidden state
-    c_0 = Variable(torch.zeros(self.num_layers, x.size(0), self.hidden_size))
+    h_0 = Variable(torch.zeros(self.num_layers, x.size(0), n_hidden)) #hidden state
+    c_0 = Variable(torch.zeros(self.num_layers, x.size(0), n_hidden))
     output, (h,c) = self.lstm(x, (h_0, c_0))
     out = hn.view(-1, self.hidden_size) #reshaping data 
 
