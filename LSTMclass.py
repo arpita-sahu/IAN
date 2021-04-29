@@ -1,4 +1,5 @@
 import torch 
+from torch.autograd import Variable
 
 class lstm_model(torch.nn.Module):
 
