@@ -1,4 +1,5 @@
 import torch
+from torch.autograd import Variable
 from LSTMclass import lstm_model
 
 class IAN(torch.nn.Module):
