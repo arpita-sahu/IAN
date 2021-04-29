@@ -1,6 +1,6 @@
 import torch 
 
-def lstm_model(torch.nn.Module):
+class lstm_model(torch.nn.Module):
 
   def __init__(self, n_hidden, embedding_dim, sig): #hidden_size = number of hidden layers  
     
