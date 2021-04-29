@@ -69,7 +69,7 @@ def run(model, train_data, test_data):
     cost, predict_list, labels_list = 0., [], []
     for _, data in enumerate(train_loader):
       aspects, contexts, labels, aspect_lens, context_lens = data[0], data[1], data[2], data[3], data[4]
-      
+      print("data = ", data)
       predict, labels = IAN.call(data, dropout = 0.5)
       loss_t = nn.CrossEntropyLoss(predict, labels)
       loss = F.mean(loss_t)
