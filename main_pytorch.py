@@ -31,7 +31,7 @@ learning_rate = 0.01
 n_epoch = 20
 pre_processed = 1
 embedding_file_name = '/content/IAN/data/Copy of glove.840B.300d.txt'
-dataset = "/content/drive/Shareddrives/Social Media False Info Propagation_V2/Arpita Sahu/IAN/data/laptop/data_info.txt"
+dataset = "/content/drive/Shareddrives/Social Media False Info Propagation_V2/Arpita Sahu/IAN/data/laptop/"
 #setting dataset and log directory
 
 class IAN_Data(Dataset):
