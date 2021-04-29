@@ -4,7 +4,7 @@ class lstm_model(torch.nn.Module):
 
   def __init__(self, n_hidden, embedding_dim, sig): #hidden_size = number of hidden layers  
     
-    super(LSTM_class, self).__init__()
+    super(LSTMclass, self).__init__()
     self.num_layers = 1
     self.sig = sig
     self.lstm = torch.nn.LSTM(input_size = embedding_dim, hidden_size = n_hidden, batch_first = True)
