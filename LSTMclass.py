@@ -16,7 +16,7 @@ class lstm_model(torch.nn.Module):
 
   def forward(self, x):
     print("x = ", x, x.dim(), x.size())
-    x = x.view(128, 300, 1) 
+    x = x.view(1, 128, 300) 
     #number of layers? number of layers = number of stacked lstm layers 
     #Input must be 3 dimensional (Sequence len, batch, input dimensions)
     #hidden size = number of hidden units
