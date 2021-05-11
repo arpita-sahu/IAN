@@ -33,6 +33,6 @@ class lstm_model(torch.nn.Module):
     if self.sig == True:
       out = self.sigmoid(h)
 
-    out = self.lstm_weight(out)
+    out = torch.nn.init.xavier_uniform_(out)#self.lstm_weight(out)
     
     return out 
