@@ -29,7 +29,7 @@ class lstm_model(torch.nn.Module):
     h_0 = Variable(torch.zeros(self.num_layers, x.size(0), self.hidden)) #hidden state
     c_0 = Variable(torch.zeros(self.num_layers, x.size(0), self.hidden))
     output, (h,c) = self.lstm(x, (h_0, c_0))
-    out = hn.view(-1, self.hidden_size) #reshaping data 
+    out = h.view(-1, self.hidden_size) #reshaping data 
 
     #aspect lstm doesn't use the sigmoid function
     if self.sig == True:
