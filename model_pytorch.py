@@ -49,11 +49,11 @@ class IAN(torch.nn.Module):
 
         context_outputs = self.context_lstm.forward(context_inputs)
         context_avg = torch.mean(context_outputs, 1)
-        aspect_att = torch.nn.Softmax(torch.tanh(torch.einsum('ijk,kl,ilm->ijm', aspect_outputs, self.aspect_w, torch.expand(context_avg, -1)) 
+        aspect_att = torch.nn.Softmax(torch.tanh(torch.einsum('ijk,kl,ilm->ijm', aspect_outputs, self.aspect_w, torch.unsqueeze(context_avg, -1)) 
         + self.aspect_b), axis=1)
 
         aspect_rep = torch.sum(aspect_att * aspect_outputs, 1)
-        context_att = torch.Softmax(torch.tanh(torch.einsum('ijk,kl,ilm->ijm', context_outputs, self.context_w,torch.expand(aspect_avg, -1)) + self.context_b), axis=1)
+        context_att = torch.Softmax(torch.tanh(torch.einsum('ijk,kl,ilm->ijm', context_outputs, self.context_w,torch.unsqueeze(aspect_avg, -1)) + self.context_b), axis=1)
         
         context_rep = torch.sum(context_att * context_outputs, 1) #find sum along dim 1 
 
