@@ -17,6 +17,7 @@ class lstm_model(torch.nn.Module):
     
     
     print(x, x.shape, x.dim())
+    print(x.shape[0], x.shape[1])
     x = x.view(1, 128, 300) 
     #number of layers? number of layers = number of stacked lstm layers 
     #Input must be 3 dimensional (Sequence len, batch, input dimensions)
