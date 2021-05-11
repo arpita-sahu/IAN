@@ -9,12 +9,13 @@ class lstm_model(torch.nn.Module):
     self.num_layers = 1
     self.sig = sig
     self.hidden = n_hidden
+    print("init = ", n_hidden, embedding_dim)
     self.lstm = torch.nn.LSTM(input_size = embedding_dim, hidden_size = n_hidden, batch_first = True)
     self.sigmoid = torch.nn.Sigmoid()
     self.lstm_weight = torch.nn.init.xavier_uniform_(self.lstm.all_weights[0][0]) #weight of the lstm needs to be passed as a parameter to the xavier uniform function
 
   def forward(self, x):
-    print(x.dim())
+    print("x = ", x, x.dim())
     #number of layers? number of layers = number of stacked lstm layers 
     #Input must be 3 dimensional (Sequence len, batch, input dimensions)
     #hidden size = number of hidden units
