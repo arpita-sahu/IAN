@@ -25,10 +25,10 @@ class IAN(tf.keras.Model):
                                                  recurrent_initializer='glorot_uniform',
                                                  stateful=True)
 
-        self.aspect_w = tf.contrib.eager.Variable(tf.random_normal([self.n_hidden, self.n_hidden]), name='aspect_w')
-        self.aspect_b = tf.contrib.eager.Variable(tf.zeros([self.n_hidden]), name='aspect_b')
-        self.context_w = tf.contrib.eager.Variable(tf.random_normal([self.n_hidden, self.n_hidden]), name='context_w')
-        self.context_b = tf.contrib.eager.Variable(tf.zeros([self.n_hidden]), name='context_b')
+        self.aspect_w = tf.compat.v1.contrib.eager.Variable(tf.random_normal([self.n_hidden, self.n_hidden]), name='aspect_w')
+        self.aspect_b = tf.compat.v1.contrib.eager.Variable(tf.zeros([self.n_hidden]), name='aspect_b')
+        self.context_w = tf.compat.v1.contrib.eager.Variable(tf.random_normal([self.n_hidden, self.n_hidden]), name='context_w')
+        self.context_b = tf.compat.v1.contrib.eager.Variable(tf.zeros([self.n_hidden]), name='context_b')
         self.output_fc = tf.keras.layers.Dense(self.n_class, kernel_regularizer=tf.keras.regularizers.l2(l=self.l2_reg))
 
     def call(self, data, dropout=0.5):
