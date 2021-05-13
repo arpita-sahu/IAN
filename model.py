@@ -25,7 +25,7 @@ class IAN(tf.keras.Model):
                                                  recurrent_initializer='glorot_uniform',
                                                  stateful=True)
 
-        self.aspect_w = tf.compat.v1.eager.Variable(tf.random_normal([self.n_hidden, self.n_hidden]), name='aspect_w')
+        self.aspect_w = tf.executing_eagerly(tf.random_normal([self.n_hidden, self.n_hidden]), name='aspect_w')
         self.aspect_b = tf.compat.v1.contrib.eager.Variable(tf.zeros([self.n_hidden]), name='aspect_b')
         self.context_w = tf.compat.v1.contrib.eager.Variable(tf.random_normal([self.n_hidden, self.n_hidden]), name='context_w')
         self.context_b = tf.compat.v1.contrib.eager.Variable(tf.zeros([self.n_hidden]), name='context_b')
