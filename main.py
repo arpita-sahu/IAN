@@ -27,7 +27,7 @@ batch_size = 128
 learning_rate = 0.01
 n_epoch = 20
 pre_processed = 1
-embedding_file_name = "/content/drive/Shareddrives/Social Media False Info Propagation_V2/Arpita Sahu/IAN/data/Copy of glove.840B.300d.txt"
+embedding_file_name = "/content/drive/Shareddrives/Social Media False Info Propagation_V2/Arpita Sahu/IAN/data/glove.6B.300d.txt"
 dataset = "/content/drive/Shareddrives/Social Media False Info Propagation_V2/Arpita Sahu/IAN/data/laptop/"
 logdir = 'logs/'
 
