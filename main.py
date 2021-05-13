@@ -14,14 +14,14 @@ config.gpu_options.per_process_gpu_memory_fraction = 0.5
 tf.compat.v1.enable_eager_execution(config=config)
 
 FLAGS = tf.compat.v1.app.flags.FLAGS
-tf.app.flags.DEFINE_integer('embedding_dim', 300, 'dimension of word embedding')
-tf.app.flags.DEFINE_integer('n_hidden', 300, 'number of hidden unit')
-tf.app.flags.DEFINE_integer('n_class', 3, 'number of distinct class')
-tf.app.flags.DEFINE_float('l2_reg', 0.001, 'l2 regularization')
+tf.compat.v1.app.flags.DEFINE_integer('embedding_dim', 300, 'dimension of word embedding')
+tf.compat.v1.app.flags.DEFINE_integer('n_hidden', 300, 'number of hidden unit')
+tf.compat.v1.app.flags.DEFINE_integer('n_class', 3, 'number of distinct class')
+tf.compat.v1.app.flags.DEFINE_float('l2_reg', 0.001, 'l2 regularization')
 
-tf.app.flags.DEFINE_integer('max_aspect_len', 0, 'max length of aspects')
-tf.app.flags.DEFINE_integer('max_context_len', 0, 'max length of contexts')
-tf.app.flags.DEFINE_string('embedding_matrix', '', 'word ids to word vectors')
+tf.compat.v1.app.flags.DEFINE_integer('max_aspect_len', 0, 'max length of aspects')
+tf.compat.v1.app.flags.DEFINE_integer('max_context_len', 0, 'max length of contexts')
+tf.compat.v1.app.flags.DEFINE_string('embedding_matrix', '', 'word ids to word vectors')
 
 batch_size = 128
 learning_rate = 0.01
