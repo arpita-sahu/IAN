@@ -13,7 +13,7 @@ config = tf.compat.v1.ConfigProto()
 config.gpu_options.per_process_gpu_memory_fraction = 0.5
 tf.compat.v1.enable_eager_execution(config=config)
 
-FLAGS = tf.app.flags.FLAGS
+FLAGS = tf.compat.v1.app.flags.FLAGS
 tf.app.flags.DEFINE_integer('embedding_dim', 300, 'dimension of word embedding')
 tf.app.flags.DEFINE_integer('n_hidden', 300, 'number of hidden unit')
 tf.app.flags.DEFINE_integer('n_class', 3, 'number of distinct class')
