@@ -46,6 +46,8 @@ class IAN(tf.keras.Model):
 
         context_outputs = self.context_lstm(context_inputs)
         context_avg = tf.reduce_mean(context_outputs, 1)
+        
+        print(aspect_outputs.shape, context_avg.shape, context_outputs.shape, aspect_avg.shape)
 
         aspect_att = tf.nn.softmax(tf.nn.tanh(tf.einsum('ijk,kl,ilm->ijm', aspect_outputs, self.aspect_w,
                                                         tf.expand_dims(context_avg, -1)) + self.aspect_b),
