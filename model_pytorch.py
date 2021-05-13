@@ -46,7 +46,7 @@ class IAN(torch.nn.Module):
         context_inputs = func(context_inputs)
  
         aspect_outputs = self.aspect_lstm.forward(aspect_inputs)
-        print("ASPECT = ",spect_outputs)
+        print("ASPECT = ",aspect_outputs)
         aspect_avg = torch.mean(aspect_outputs, 1)
         
         context_outputs = self.context_lstm.forward(context_inputs)
