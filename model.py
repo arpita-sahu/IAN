@@ -26,9 +26,9 @@ class IAN(tf.keras.Model):
                                                  stateful=True)
 
         self.aspect_w = tf.Variable(tf.random.normal([self.n_hidden, self.n_hidden]), name='aspect_w')
-        self.aspect_b = tf.executing_eagerly(tf.zeros([self.n_hidden]), name='aspect_b')
-        self.context_w = tf.executing_eagerly(tf.random.normal([self.n_hidden, self.n_hidden]), name='context_w')
-        self.context_b = tf.executing_eagerly(tf.zeros([self.n_hidden]), name='context_b')
+        self.aspect_b = tf.Variable(tf.zeros([self.n_hidden]), name='aspect_b')
+        self.context_w = tf.Variable(tf.random.normal([self.n_hidden, self.n_hidden]), name='context_w')
+        self.context_b = tf.Variable(tf.zeros([self.n_hidden]), name='context_b')
         self.output_fc = tf.keras.layers.Dense(self.n_class, kernel_regularizer=tf.keras.regularizers.l2(l=self.l2_reg))
 
     def call(self, data, dropout=0.5):
