@@ -47,16 +47,13 @@ class IAN(torch.nn.Module):
  
         aspect_outputs = self.aspect_lstm.forward(aspect_inputs)
         aspect_outputs = torch.reshape(aspect_outputs, (1, aspect_outputs.shape[0], aspect_outputs.shape[1]))
-        print("ASPECT = ",aspect_outputs)
         aspect_avg = torch.mean(aspect_outputs, 1)
         print(aspect_avg)
         
         context_outputs = self.context_lstm.forward(context_inputs)
-        print("\n\n\nCONTEXT = ", context_outputs)
         context_avg = torch.mean(context_outputs, 1)
-        print(context_avg)
         
-        print("\n\n\n\nshapes : ", context_outputs.shape, aspect_outputs.shape, context_avg.shape)
+        print("\n\n\n\nshapes : ", context_outputs.shape, aspect_outputs.shape, context_avg.shape, aspect_avg.shape, torch.unsqueeze(aspect_avg, -1).shape)
 
         aspect_outputs = torch.reshape(aspect_outputs, (aspect_outputs.shape[0],aspect_outputs.shape[1], 1))
         aspect_att = torch.nn.functional.softmax(torch.tanh(torch.einsum('ijk,kl,ilm->ijm', aspect_outputs, self.aspect_w,  torch.unsqueeze(context_avg, -1)) + self.aspect_b), dim=1)
