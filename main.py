@@ -44,7 +44,7 @@ def run(model, train_data, test_data):
     test_data = tf.data.Dataset.from_tensor_slices(test_data)
     test_data = test_data.batch(batch_size, drop_remainder=True)
 
-    iterator = tf.data.Iterator.from_structure(train_data.output_types, train_data.output_shapes)
+    iterator = tf.compat.v1.data.Iterator.from_structure(train_data.output_types, train_data.output_shapes)
     optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
     writer = tf.contrib.summary.create_file_writer(logdir)
     writer.set_as_default()
