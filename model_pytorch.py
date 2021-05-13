@@ -67,7 +67,7 @@ class IAN(torch.nn.Module):
 
         rep = torch.cat([aspect_rep, context_rep], 1) #concat along dimension 1
         print("\n\n\nREP = ", rep, rep.shape)
-        print(self.n_classes)
+        print(self.n_class)
         predict = self.output_fc(rep)
 
         return predict, labels
