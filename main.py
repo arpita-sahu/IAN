@@ -11,7 +11,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '4'
 
 config = tf.compat.v1.ConfigProto()
 config.gpu_options.per_process_gpu_memory_fraction = 0.5
-tf.enable_eager_execution(config=config)
+tf.compat.v1.enable_eager_execution(config=config)
 
 FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_integer('embedding_dim', 300, 'dimension of word embedding')
