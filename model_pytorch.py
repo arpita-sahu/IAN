@@ -58,7 +58,7 @@ class IAN(torch.nn.Module):
         aspect_rep = torch.sum(aspect_att * aspect_outputs, 1)
         context_att = torch.nn.Softmax(torch.tanh(torch.einsum('ijk,kl,ilm->ijm', context_outputs, self.context_w, torch.unsqueeze(aspect_avg, -1)) + self.context_b))#, axis=1)
         
-        context_rep = torch.sum(context_att * context_outputs, 1) #find sum along dim 1 
+        context_rep = torch.sum(torch.tensor(context_att) * context_outputs, 1) #find sum along dim 1 
 
         rep = torch.cat([aspect_rep, context_rep], 1) #concat along dimension 1
         predict = self.output_fc(rep)
