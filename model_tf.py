@@ -57,6 +57,8 @@ class IAN(tf.keras.Model):
         context_rep = tf.reduce_sum(context_att * context_outputs, 1)
 
         rep = tf.concat([aspect_rep, context_rep], 1)
+        print("\n\nREP = ", rep, rep.shape)
         predict = self.output_fc(rep)
+        print("\n\nPREDICT = ",predict, predict.shape) 
 
         return predict, labels
