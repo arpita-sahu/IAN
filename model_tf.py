@@ -5,7 +5,7 @@ class IAN(tf.keras.Model):
 
     def __init__(self, config):
         super(IAN, self).__init__()
-
+        print("INSIDE INIT")
         self.embedding_dim = config.embedding_dim
         self.n_hidden = config.n_hidden
         self.n_class = config.n_class
@@ -32,6 +32,7 @@ class IAN(tf.keras.Model):
         self.output_fc = tf.keras.layers.Dense(self.n_class, kernel_regularizer=tf.keras.regularizers.l2(l=self.l2_reg))
 
     def call(self, data, dropout=0.5):
+        print("INSIDE CALL")
         aspects, contexts, labels, aspect_lens, context_lens = data
         aspect_inputs = tf.nn.embedding_lookup(self.embedding_matrix, aspects)
         aspect_inputs = tf.cast(aspect_inputs, tf.float32)
