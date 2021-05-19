@@ -109,17 +109,18 @@ def main(_):
     train_data = read_data(word2id, FLAGS.max_aspect_len, FLAGS.max_context_len, dataset + 'train', pre_processed)
     test_data = read_data(word2id, FLAGS.max_aspect_len, FLAGS.max_context_len, dataset + 'test', pre_processed)
 
-    print('Loading pre-trained word vectors ...')
-    print("\n\nMODEL") 
-    predict, labels = IAN.call(train_data, dropout=0.5)
+    #print('Loading pre-trained word vectors ...')
+    #print("\n\nMODEL") 
+    #predict, labels = IAN.call(train_data, dropout=0.5)
     
-    #FLAGS.embedding_matrix = load_word_embeddings(embedding_file_name, FLAGS.embedding_dim, word2id)
+    FLAGS.embedding_matrix = load_word_embeddings(embedding_file_name, FLAGS.embedding_dim, word2id)
 
-    #model = IAN(FLAGS)
-    #run(model, train_data, test_data)
+    model = IAN(FLAGS)
+    print("model in main = ", model)
+    run(model, train_data, test_data)
 
-    #end_time = time.time()
-    #print('Time Costing: %s' % (end_time - start_time))
+    end_time = time.time()
+    print('Time Costing: %s' % (end_time - start_time))
 
 
 if __name__ == '__main__':
