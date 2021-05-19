@@ -111,7 +111,7 @@ def main(_):
 
     print('Loading pre-trained word vectors ...')
     print("\n\nMODEL") 
-    predict, labels = model.call(train_data, dropout=0.5)
+    predict, labels = IAN.call(train_data, dropout=0.5)
     
     #FLAGS.embedding_matrix = load_word_embeddings(embedding_file_name, FLAGS.embedding_dim, word2id)
 
