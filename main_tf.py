@@ -56,7 +56,7 @@ def run(model, train_data, test_data):
             data = iterator.get_next()
             with tf.GradientTape() as tape:
                 predict, labels = model(data, dropout=0.5)
-                print("main = ", predict, labels)
+                #print("main = ", predict, labels)
                 loss_t = tf.nn.softmax_cross_entropy_with_logits_v2(logits=predict, labels=labels)
                 loss = tf.reduce_mean(loss_t)
                 cost += tf.reduce_sum(loss_t)
