@@ -66,7 +66,7 @@ class IAN(torch.nn.Module):
         print("context = ", context_rep, context_rep.shape)
 
         rep = torch.cat([aspect_rep, context_rep], 1) #concat along dimension 1
-        print("random! = ", self.max_aspect_len, self.embedding_dim.shape, self.aspect_w.shape, self.aspect_b.shape, self.context_w.shape, self.context_b.shape)
+        print("test = ", self.max_aspect_len, self.embedding_dim.shape, self.aspect_w.shape, self.aspect_b.shape, self.context_w.shape, self.context_b.shape)
         print("\n\n\nREP = ", rep, rep.shape)
         print(self.n_class)
         predict = self.output_fc(rep)
