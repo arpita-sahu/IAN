@@ -116,9 +116,10 @@ def main(_):
     FLAGS.embedding_matrix = load_word_embeddings(embedding_file_name, FLAGS.embedding_dim, word2id)
 
     model = IAN(FLAGS)
-    print("model in main = ", model)
-    print("model shape = ", model.shape)
-    print(model(train_data, dropout = 0.5))
+    predict, label = model(train_data, dropout = 0.5)
+    print(predict)
+    print("predict shape = ", predict.shape)
+    #print()
     run(model, train_data, test_data)
 
     end_time = time.time()
