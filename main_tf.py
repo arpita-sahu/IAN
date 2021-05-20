@@ -56,7 +56,6 @@ def run(model, train_data, test_data):
             data = iterator.get_next()
             with tf.GradientTape() as tape:
                 predict, labels = model(data, dropout=0.5)
-                #print("main = ", predict, labels)
                 loss_t = tf.nn.softmax_cross_entropy_with_logits_v2(logits=predict, labels=labels)
                 loss = tf.reduce_mean(loss_t)
                 cost += tf.reduce_sum(loss_t)
@@ -109,17 +108,10 @@ def main(_):
     train_data = read_data(word2id, FLAGS.max_aspect_len, FLAGS.max_context_len, dataset + 'train', pre_processed)
     test_data = read_data(word2id, FLAGS.max_aspect_len, FLAGS.max_context_len, dataset + 'test', pre_processed)
 
-    #print('Loading pre-trained word vectors ...')
-    #print("\n\nMODEL") 
-    #predict, labels = IAN.call(train_data, dropout=0.5)
-    
+    print('Loading pre-trained word vectors ...')
     FLAGS.embedding_matrix = load_word_embeddings(embedding_file_name, FLAGS.embedding_dim, word2id)
 
     model = IAN(FLAGS)
-    predict, label = model(train_data, dropout = 0.5)
-    print(predict)
-    print("predict shape = ", predict.shape)
-    #print()
     run(model, train_data, test_data)
 
     end_time = time.time()
@@ -127,5 +119,4 @@ def main(_):
 
 
 if __name__ == '__main__':
-    
     tf.app.run()
