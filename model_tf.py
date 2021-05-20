@@ -56,8 +56,9 @@ class IAN(tf.keras.Model):
                                                          tf.expand_dims(aspect_avg, -1)) + self.context_b),
                                     axis=1)
         context_rep = tf.reduce_sum(context_att * context_outputs, 1)
-
+        
         rep = tf.concat([aspect_rep, context_rep], 1)
+        print("random! = ", self.max_aspect_len, self.embedding_dim.shape, self.aspect_w.shape, self.aspect_b.shape, self.context_w.shape, self.context_b.shape)
         print("\n\nREP = ", rep, "\n\nREP SHAPE = ", rep.shape)
         predict = self.output_fc(rep)
         print("\n\nPREDICT = ",predict, "\n\nPREDICT SHAPE = ",predict.shape) 
