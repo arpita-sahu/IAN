@@ -16,8 +16,6 @@ class IAN(torch.nn.Module):
         self.max_aspect_len = config.max_aspect_len 
         self.max_context_len = config.max_context_len
         self.embedding_matrix = config.embedding_matrix
-        
-        self.dim = 0 
 
         self.aspect_lstm = lstm_model(self.embedding_dim, self.n_hidden, False)   
         self.context_lstm = lstm_model(self.embedding_dim, self.n_hidden, True)
@@ -27,7 +25,7 @@ class IAN(torch.nn.Module):
         self.context_w = Variable(torch.randn([self.n_hidden, self.n_hidden]), name='context_w')
         self.context_b = Variable(torch.zeros([self.n_hidden]), name='context_b')
 
-        self.output_fc = torch.nn.Linear(self.dim, self.n_class) # in_features = out_features = n_class. Throwing an error when including just 1 parameter
+        self.output_fc = torch.nn.Linear(self.embedding_dim, self.n_class) # in_features = out_features = n_class. Throwing an error when including just 1 parameter
         self.optimizer = torch.optim.Adam(self.output_fc.parameters(), lr=self.l2_reg) #L2 regularization
 
         #self.output_fc = tf.keras.layers.Dense(self.n_class, kernel_regularizer=tf.keras.regularizers.l2(l=self.l2_reg)) #kernel_regularizer: regularizer to apply a penality on the layer's kernel
@@ -70,7 +68,6 @@ class IAN(torch.nn.Module):
         rep = torch.cat([aspect_rep, context_rep], 1) #concat along dimension 1
         print("\n\n\nREP = ", rep, rep.shape)
         print(self.n_class)
-        self.dim = rep.shape[1]
         predict = self.output_fc(rep)
 
         return predict, labels
