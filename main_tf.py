@@ -117,7 +117,8 @@ def main(_):
 
     model = IAN(FLAGS)
     print("model in main = ", model)
-    print(model.call(train_data, dropout = 0.5))
+    print("model shape = ", model.shape)
+    print(model(train_data, dropout = 0.5))
     run(model, train_data, test_data)
 
     end_time = time.time()
