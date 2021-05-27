@@ -75,7 +75,7 @@ def run(model, train_data, test_data):
       label_ind = torch.argmax(labels, dim = 1) 
       loss_func = torch.nn.CrossEntropyLoss()
       loss_t = loss_func(predict, label_ind)
-      loss = F.mean(loss_t)
+      loss = torch.mean(loss_t) #F.mean(loss_t)
         
       optimizer.zero_grad()
       loss.backward()
