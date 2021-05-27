@@ -41,7 +41,7 @@ class lstm_model(torch.nn.Module):
     #aspect lstm doesn't use the sigmoid function
     if self.sig == True:
       print("CONTEXT!!!!!")
-      out = self.sigmoid(h)
+      out = self.sigmoid(output)
       print("sig = ", out.shape)
     else: 
       print("ASPECT!!!!")
