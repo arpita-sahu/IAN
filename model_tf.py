@@ -54,13 +54,13 @@ class IAN(tf.keras.Model):
 
         print(aspect_outputs.shape, self.aspect_w.shape, tf.expand_dims(context_avg,-1).shape, self.aspect_b.shape)
         aspect_att = tf.nn.softmax(tf.nn.tanh(tf.einsum('ijk,kl,ilm->ijm', aspect_outputs, self.aspect_w,
-                                                        tf.expand_dims(context_avg, -1)) + self.aspect_b),
-                                   axis=1)
+                                                        tf.expand_dims(context_avg, -1)) + self.aspect_b), axis=1)
+        print("ASPECT ATT = ", aspect_att, aspect_att.shape)
         aspect_rep = tf.reduce_sum(aspect_att * aspect_outputs, 1)
         #print("Aspect = ", aspect_rep, aspect_rep.shape)
         context_att = tf.nn.softmax(tf.nn.tanh(tf.einsum('ijk,kl,ilm->ijm', context_outputs, self.context_w,
-                                                         tf.expand_dims(aspect_avg, -1)) + self.context_b),
-                                    axis=1)
+                                                         tf.expand_dims(aspect_avg, -1)) + self.context_b), axis=1)
+        print("CONTEXT ATT = ", context_att, context_att.shape)
         context_rep = tf.reduce_sum(context_att * context_outputs, 1)
         #print("Aspect = ", context_rep, context_rep.shape)
         
