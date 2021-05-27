@@ -25,7 +25,7 @@ class IAN(torch.nn.Module):
         self.context_w = Variable(torch.randn([self.n_hidden, self.n_hidden]), name='context_w')
         self.context_b = Variable(torch.zeros([self.n_hidden]), name='context_b')
 
-        self.output_fc = torch.nn.Linear(self.n_class, self.n_class) # in_features = out_features = n_class. Throwing an error when including just 1 parameter
+        self.output_fc = torch.nn.Linear(600, self.n_class) # in_features = out_features = n_class. Throwing an error when including just 1 parameter
         self.optimizer = torch.optim.Adam(self.output_fc.parameters(), lr=self.l2_reg) #L2 regularization
 
         #self.output_fc = tf.keras.layers.Dense(self.n_class, kernel_regularizer=tf.keras.regularizers.l2(l=self.l2_reg)) #kernel_regularizer: regularizer to apply a penality on the layer's kernel
