@@ -63,4 +63,4 @@ class IAN(tf.keras.Model):
         predict = self.output_fc(rep)
         print("\n\nPREDICT = ",predict, "\n\nPREDICT SHAPE = ",predict.shape) 
 
-        return predict, labels, rep
+        return predict, labels
