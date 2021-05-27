@@ -35,12 +35,12 @@ class lstm_model(torch.nn.Module):
     output, (h,c) = self.lstm(x, (h_0, c_0))
     print("output, h, c = ", output,output.shape, h, c)
     #out = h.view(-1, self.hidden) #reshaping data 
-    print("out = ", out, out.shape)
+    
 
     #aspect lstm doesn't use the sigmoid function
     if self.sig == True:
       out = self.sigmoid(h)
 
     out = torch.nn.init.xavier_uniform_(out)#self.lstm_weight(out)
-    
+    print("out = ", out, out.shape)
     return out 
