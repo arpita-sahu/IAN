@@ -36,7 +36,9 @@ class IAN(tf.keras.Model):
         aspects, contexts, labels, aspect_lens, context_lens = data
         #print(aspects, contexts, aspect_lens, context_lens)
         aspect_inputs = tf.nn.embedding_lookup(self.embedding_matrix, aspects)
+        print(aspect_inputs.shape)
         aspect_inputs = tf.cast(aspect_inputs, tf.float32)
+        print(aspect_inputs.shape)
         aspect_inputs = tf.nn.dropout(aspect_inputs, keep_prob=dropout)
         print("INPUTS = \n", aspect_inputs.shape)
         context_inputs = tf.nn.embedding_lookup(self.embedding_matrix, contexts)
