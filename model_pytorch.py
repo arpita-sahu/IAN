@@ -63,14 +63,14 @@ class IAN(torch.nn.Module):
         # aspect_att = tf.nn.softmax(tf.nn.tanh(tf.einsum('ijk,kl,ilm->ijm', aspect_outputs, self.aspect_w, tf.expand_dims(context_avg, -1)) + self.aspect_b),
         print(aspect_outputs.shape, self.aspect_w.shape, torch.unsqueeze(context_avg, -1).shape, self.aspect_b.shape)
         aspect_att = torch.nn.functional.softmax(torch.tanh(torch.einsum('ijk,kl,ilm->ijm', aspect_outputs, self.aspect_w,  torch.unsqueeze(context_avg, -1)) + self.aspect_b), dim=1)
-        print("ASPECT ATT = ", aspect_att, aspect_att.shape)
+        #print("ASPECT ATT = ", aspect_att, aspect_att.shape)
         
         #print(type(aspect_att), type(aspect_outputs))
         aspect_rep = torch.sum(aspect_att * aspect_outputs, 1)
         print("Aspect rep = ", aspect_rep.shape)
-        print("context = ", context_outputs.shape, self.context_w.shape, torch.unsqueeze(aspect_avg, -1).shape, self.context_b.shape)
+        #print("context = ", context_outputs.shape, self.context_w.shape, torch.unsqueeze(aspect_avg, -1).shape, self.context_b.shape)
         context_att = torch.nn.functional.softmax(torch.tanh(torch.einsum('ijk,kl,ilm->ijm', context_outputs, self.context_w, torch.unsqueeze(aspect_avg, -1)) + self.context_b), dim=1)
-        print("CONTEXT ATT = ", context_att, context_att.shape)
+        #print("CONTEXT ATT = ", context_att, context_att.shape)
         
         context_rep = torch.sum(torch.tensor(context_att) * context_outputs, 1) #find sum along dim 1 
         print("context rep = ", context_rep.shape)
