@@ -33,7 +33,7 @@ class IAN(tf.keras.Model):
 
     def call(self, data, dropout=0.5):
         print("INSIDE CALL")
-        #aspects, contexts, labels, aspect_lens, context_lens = data
+        aspects, contexts, labels, aspect_lens, context_lens = data
         #print(aspects, contexts, aspect_lens, context_lens)
         aspect_inputs = tf.nn.embedding_lookup(self.embedding_matrix, aspects)
         aspect_inputs = tf.cast(aspect_inputs, tf.float32)
