@@ -80,6 +80,7 @@ class IAN(torch.nn.Module):
         #print("test = ", self.max_aspect_len, self.embedding_dim, self.aspect_w.shape, self.aspect_b.shape, self.context_w.shape, self.context_b.shape)
         #print("\n\n\nREP = ", rep, rep.shape)
         #print(self.n_class)
+        self.output_fc = torch.nn.Linear(rep.shape[1], self.n_class)
         predict = self.output_fc(rep)
         
         print("prediction = ", predict, labels, predict.shape)
