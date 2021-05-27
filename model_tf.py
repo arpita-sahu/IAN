@@ -70,6 +70,7 @@ class IAN(tf.keras.Model):
         #print("test = ", self.max_aspect_len, self.embedding_dim, self.aspect_w.shape, self.aspect_b.shape, self.context_w.shape, self.context_b.shape)
         #print("\n\nREP = ", rep, "\n\nREP SHAPE = ", rep.shape)
         predict = self.output_fc(rep)
+        print("prediction = ", predict, labels, predict.shape)
         #print("\n\nPREDICT = ",predict, "\n\nPREDICT SHAPE = ",predict.shape) 
 
         return predict, labels
