@@ -42,16 +42,17 @@ class IAN(torch.nn.Module):
         rate = 1 - dropout #dropout = keepprob
         func = torch.nn.Dropout(p=rate)
         aspect_inputs = func(aspect_inputs) #change some elements to 0 to reduce overfitting 
-        print("INPUTS = \n", aspect_inputs.shape)
+        #print("INPUTS = \n", aspect_inputs.shape)
 
         context_inputs = torch.index_select(input = torch.tensor(self.embedding_matrix), dim = 0, index = contexts.long().flatten())
         context_inputs = torch.reshape(context_inputs, (contexts.shape[0], contexts.shape[1], context_inputs.shape[1]))
         context_inputs = context_inputs.type(torch.FloatTensor)
         context_inputs = func(context_inputs)
-        print(context_inputs, context_inputs.shape)
+        #print(context_inputs, context_inputs.shape)
  
         aspect_outputs = self.aspect_lstm.forward(aspect_inputs)
-        print("ASPECT OUTPUT = ", aspect_outputs, aspect_outputs.shape)
+        print("SHAPES = ", self.embedding_dim, self.n_hidden, self.n_class)
+        #print("ASPECT OUTPUT = ", aspect_outputs, aspect_outputs.shape)
         #aspect_outputs = torch.reshape(aspect_outputs, (1, aspect_outputs.shape[0], aspect_outputs.shape[1]))
         aspect_avg = torch.mean(aspect_outputs, 1)
         
