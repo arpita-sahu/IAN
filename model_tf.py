@@ -42,7 +42,7 @@ class IAN(tf.keras.Model):
         context_inputs = tf.nn.embedding_lookup(self.embedding_matrix, contexts)
         context_inputs = tf.cast(context_inputs, tf.float32)
         context_inputs = tf.nn.dropout(context_inputs, keep_prob=dropout)
-        print(context_inputs, context_inputs.shape)
+        #print(context_inputs, context_inputs.shape)
         
         aspect_outputs = self.aspect_lstm(aspect_inputs)
         aspect_avg = tf.reduce_mean(aspect_outputs, 1)
@@ -50,6 +50,7 @@ class IAN(tf.keras.Model):
         context_outputs = self.context_lstm(context_inputs)
         context_avg = tf.reduce_mean(context_outputs, 1)
 
+        print(aspect_outputs.shape, self.aspect_w.shape, tf.expand_dims(context_avg,-1).shape, self.aspectt_b.shape)
         aspect_att = tf.nn.softmax(tf.nn.tanh(tf.einsum('ijk,kl,ilm->ijm', aspect_outputs, self.aspect_w,
                                                         tf.expand_dims(context_avg, -1)) + self.aspect_b),
                                    axis=1)
