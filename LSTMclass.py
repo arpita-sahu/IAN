@@ -27,13 +27,13 @@ class lstm_model(torch.nn.Module):
     #x = the input tensor 
 
     #LSTMCell = same as LSTM except the number of layers is always 1 
-    print("X = ", x, x.shape)
+    #print("X = ", x, x.shape)
     h_0 = Variable(torch.zeros(self.num_layers, x.size(0), self.hidden)) #hidden state
-    print("h_0 = ", h_0, self.num_layers, self.hidden)
+    #print("h_0 = ", h_0, self.num_layers, self.hidden)
     c_0 = Variable(torch.zeros(self.num_layers, x.size(0), self.hidden))
-    print("c_0 = ", c_0) 
+    #print("c_0 = ", c_0) 
     output, (h,c) = self.lstm(x, (h_0, c_0))
-    print("output, h, c = ", output,output.shape, h, c)
+    #print("output, h, c = ", output,output.shape, h, c)
     #out = h.view(-1, self.hidden) #reshaping data 
     
     out = output
@@ -42,5 +42,5 @@ class lstm_model(torch.nn.Module):
       out = self.sigmoid(h)
 
     out = torch.nn.init.xavier_uniform_(out)#self.lstm_weight(out)
-    print("out = ", out, out.shape)
+    #print("out = ", out, out.shape)
     return out 
