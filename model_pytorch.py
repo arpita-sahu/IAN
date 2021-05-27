@@ -81,5 +81,6 @@ class IAN(torch.nn.Module):
         #print("\n\n\nREP = ", rep, rep.shape)
         #print(self.n_class)
         predict = self.output_fc(rep)
-
+        
+        print("prediction = ", predict, labels, predict.shape)
         return predict, labels
