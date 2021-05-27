@@ -36,7 +36,7 @@ class lstm_model(torch.nn.Module):
     print("output, h, c = ", output,output.shape, h, c)
     #out = h.view(-1, self.hidden) #reshaping data 
     
-
+    out = output
     #aspect lstm doesn't use the sigmoid function
     if self.sig == True:
       out = self.sigmoid(h)
