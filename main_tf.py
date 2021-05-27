@@ -54,7 +54,7 @@ def run(model, train_data, test_data):
         iterator.make_initializer(train_data)
         for _ in range(math.floor(train_data_size / batch_size)):
             data = iterator.get_next()
-            print("DATA IN MAIN = ", data, len(data))
+            #print("DATA IN MAIN = ", data, len(data))
             with tf.GradientTape() as tape:
                 predict, labels = model(data, dropout=0.5)
                 print("predict shape = ", predict.shape)
