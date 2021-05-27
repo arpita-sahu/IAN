@@ -51,6 +51,7 @@ class IAN(torch.nn.Module):
         print(context_inputs, context_inputs.shape)
  
         aspect_outputs = self.aspect_lstm.forward(aspect_inputs)
+        print("ASPECT OUTPUT = ", aspect_outputs, aspect_outputs.shape)
         #aspect_outputs = torch.reshape(aspect_outputs, (1, aspect_outputs.shape[0], aspect_outputs.shape[1]))
         aspect_avg = torch.mean(aspect_outputs, 1)
         
