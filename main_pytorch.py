@@ -63,7 +63,7 @@ def run(model, train_data, test_data):
   test_dataset = IAN_Data(test_data)
   test_loader = DataLoader(test_dataset, batch_size = batch_size, shuffle = False, drop_last = True)
     
-  #optimizer = torch.optim.Adam(model.config(), lr=learning_rate)
+  optimizer = torch.optim.Adam(model.config(), lr=learning_rate)
     
   for i in range(n_epoch):
     cost, predict_list, labels_list = 0., [], []
@@ -77,8 +77,7 @@ def run(model, train_data, test_data):
       loss_t = loss_func(predict, label_ind)
       loss = torch.mean(loss_t) #F.mean(loss_t)
         
-      instance = IAN()  
-      instance.optimizer.zero_grad()
+      optimizer.zero_grad()
       loss.backward()
       optimizer.step()
       #torch.autograd()
