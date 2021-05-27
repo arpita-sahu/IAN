@@ -39,8 +39,10 @@ class lstm_model(torch.nn.Module):
     out = output
     #aspect lstm doesn't use the sigmoid function
     if self.sig == True:
+      print("CONTEXT!!!!!")
       out = self.sigmoid(h)
+      print("sig = ", out.shape)
 
     out = torch.nn.init.xavier_uniform_(out)#self.lstm_weight(out)
-    #print("out = ", out, out.shape)
+    print("out = ", out, out.shape)
     return out 
