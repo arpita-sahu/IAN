@@ -91,7 +91,8 @@ def run(model, train_data, test_data):
       aspects, contexts, labels, aspect_lens, context_lens = data[0], data[1], data[2], data[3], data[4]
       
       predict, labels = model(data, dropout=1.0)
-      loss_t = torch.nn.CrossEntropyLoss(predict, labels)
+      loss_func = torch.nn.CrossEntropyLoss()
+      loss_t = loss_func(predict, labels)
 
       predict_list.extend(F.argmax(F.softmax(predict)).numpy())
       labels_list.extend(F.argmax(labels).numpy())
