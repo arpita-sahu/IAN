@@ -72,8 +72,9 @@ def run(model, train_data, test_data):
       #print("DATA IN MAIN = ", data, len(data))
       predict, labels = model.call(data, dropout = 0.5)
       #loss_t = torch.nn.CrossEntropyLoss(predict, labels)
+      label_ind = torch.argmax(labels, dim = 1) 
       loss_func = torch.nn.CrossEntropyLoss()
-      loss_t = loss_func(predict, labels)
+      loss_t = loss_func(predict, label_ind)
       loss = F.mean(loss_t)
         
       optimizer.zero_grad()
