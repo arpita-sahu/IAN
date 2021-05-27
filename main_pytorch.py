@@ -77,7 +77,8 @@ def run(model, train_data, test_data):
       loss_t = loss_func(predict, label_ind)
       loss = torch.mean(loss_t) #F.mean(loss_t)
         
-      optimizer.zero_grad()
+      instance = IAN()  
+      instance.optimizer.zero_grad()
       loss.backward()
       optimizer.step()
       #torch.autograd()
