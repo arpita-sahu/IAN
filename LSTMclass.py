@@ -42,9 +42,6 @@ class lstm_model(torch.nn.Module):
     if self.sig == True:
       #print("CONTEXT!!!!!")
       out = self.sigmoid(output)
-      #print("sig = ", out.shape)
-    else: 
-      #print("ASPECT!!!!")
 
     out = torch.nn.init.xavier_uniform_(out)#self.lstm_weight(out)
     #print("out = ", out, out.shape)
