@@ -45,7 +45,7 @@ class IAN(torch.nn.Module):
         print("INPUTS = \n", aspect_inputs.shape)
 
         context_inputs = torch.index_select(input = torch.tensor(self.embedding_matrix), dim = 0, index = contexts.long().flatten())
-        aspect_inputs = torch.reshape(aspect_inputs, (contexts.shape[0], contexts.shape[1], context_inputs.shape[1]))
+        context_inputs = torch.reshape(context_inputs, (contexts.shape[0], contexts.shape[1], context_inputs.shape[1]))
         context_inputs = context_inputs.type(torch.FloatTensor)
         context_inputs = func(context_inputs)
         print(context_inputs, context_inputs.shape)
