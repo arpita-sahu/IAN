@@ -70,6 +70,7 @@ class IAN(torch.nn.Module):
         #print("Aspect = ", aspect_rep, aspect_rep.shape)
         #print("context = ", context_outputs.shape, self.context_w.shape, aspect_avg.shape, torch.unsqueeze(aspect_avg, -1).shape, aspect_avg)
         #context_outputs = torch.reshape(context_outputs, (context_outputs.shape[0],context_outputs.shape[1], 1))
+        print("context = ", context_outputs.shape, self.context_w.shape, torch.unsqueeze(aspect_avg, -1).shape, self.context_b.shape)
         context_att = torch.nn.functional.softmax(torch.tanh(torch.einsum('ijk,kl,ilm->ijm', context_outputs, self.context_w, torch.unsqueeze(aspect_avg, -1)) + self.context_b), dim=1)
         print("CONTEXT ATT = ", context_att, context_att.shape)
         
