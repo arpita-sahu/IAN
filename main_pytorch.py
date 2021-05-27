@@ -71,7 +71,9 @@ def run(model, train_data, test_data):
       aspects, contexts, labels, aspect_lens, context_lens = data[0], data[1], data[2], data[3], data[4]
       #print("DATA IN MAIN = ", data, len(data))
       predict, labels = model.call(data, dropout = 0.5)
-      loss_t = torch.nn.CrossEntropyLoss(predict, labels)
+      #loss_t = torch.nn.CrossEntropyLoss(predict, labels)
+      loss_func = torch.nn.CrossEntropyLoss()
+      loss_t = loss_func(predict, labels)
       loss = F.mean(loss_t)
         
       optimizer.zero_grad()
