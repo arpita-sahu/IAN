@@ -45,6 +45,7 @@ class IAN(tf.keras.Model):
         #print(context_inputs, context_inputs.shape)
         
         aspect_outputs = self.aspect_lstm(aspect_inputs)
+        print("ASPECT OUTPUT = ", aspect_outputs, aspect_outputs.shape)
         aspect_avg = tf.reduce_mean(aspect_outputs, 1)
 
         context_outputs = self.context_lstm(context_inputs)
