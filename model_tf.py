@@ -44,7 +44,7 @@ class IAN(tf.keras.Model):
         context_inputs = tf.nn.dropout(context_inputs, keep_prob=dropout)
         #print(context_inputs, context_inputs.shape)
         
-        print("SHAPE = ", self.embedding_dim, self.n_hidden, self.n_class)
+        #print("SHAPE = ", self.embedding_dim, self.n_hidden, self.n_class)
         aspect_outputs = self.aspect_lstm(aspect_inputs)
         #print("ASPECT OUTPUT = ", aspect_outputs, aspect_outputs.shape)
         aspect_avg = tf.reduce_mean(aspect_outputs, 1)
@@ -52,18 +52,18 @@ class IAN(tf.keras.Model):
         context_outputs = self.context_lstm(context_inputs)
         context_avg = tf.reduce_mean(context_outputs, 1)
 
-        print(aspect_outputs.shape, self.aspect_w.shape, tf.expand_dims(context_avg,-1).shape, self.aspect_b.shape)
+        #print(aspect_outputs.shape, self.aspect_w.shape, tf.expand_dims(context_avg,-1).shape, self.aspect_b.shape)
         aspect_att = tf.nn.softmax(tf.nn.tanh(tf.einsum('ijk,kl,ilm->ijm', aspect_outputs, self.aspect_w,
                                                         tf.expand_dims(context_avg, -1)) + self.aspect_b), axis=1)
         #print("ASPECT ATT = ", aspect_att, aspect_att.shape)
         aspect_rep = tf.reduce_sum(aspect_att * aspect_outputs, 1)
-        #print("Aspect = ", aspect_rep, aspect_rep.shape)
-        print("context = ", context_outputs.shape, self.context_w.shape, tf.expand_dims(aspect_avg, -1).shape, self.context_b.shape)
+        print("Aspect rep = ",  aspect_rep.shape)
+        #print("context = ", context_outputs.shape, self.context_w.shape, tf.expand_dims(aspect_avg, -1).shape, self.context_b.shape)
         context_att = tf.nn.softmax(tf.nn.tanh(tf.einsum('ijk,kl,ilm->ijm', context_outputs, self.context_w,
                                                          tf.expand_dims(aspect_avg, -1)) + self.context_b), axis=1)
-        print("CONTEXT ATT = ", context_att, context_att.shape)
+        #print("CONTEXT ATT = ", context_att, context_att.shape)
         context_rep = tf.reduce_sum(context_att * context_outputs, 1)
-        #print("Aspect = ", context_rep, context_rep.shape)
+        print("Context rep = ",  context_rep.shape)
         
         rep = tf.concat([aspect_rep, context_rep], 1)
         #print("test = ", self.max_aspect_len, self.embedding_dim, self.aspect_w.shape, self.aspect_b.shape, self.context_w.shape, self.context_b.shape)
