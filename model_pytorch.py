@@ -33,19 +33,20 @@ class IAN(torch.nn.Module):
     def call(self, data, dropout=0.5): #done
     
         aspects, contexts, labels, aspect_lens, context_lens = data
-        print(aspects, contexts, labels, aspect_lens, context_lens)
-        print("Shapes = ", aspects.shape, contexts.shape, labels.shape, aspect_lens.shape, context_lens.shape)
+        #print(aspects, contexts, labels, aspect_lens, context_lens)
+        #print("Shapes = ", aspects.shape, contexts.shape, labels.shape, aspect_lens.shape, context_lens.shape)
 
         aspect_inputs = torch.index_select(input = torch.tensor(self.embedding_matrix), dim = 0, index = aspects.long().flatten()) #return values of elements in embedding_matrix at indices given by aspects
         aspect_inputs = aspect_inputs.type(torch.FloatTensor) #converting tensor to float32 type 
         rate = 1 - dropout #dropout = keepprob
         func = torch.nn.Dropout(p=rate)
         aspect_inputs = func(aspect_inputs) #change some elements to 0 to reduce overfitting 
-
+        print("INPUTS = \n", aspect_inputs.shape)
 
         context_inputs = torch.index_select(input = torch.tensor(self.embedding_matrix), dim = 0, index = contexts.long().flatten())
         context_inputs = context_inputs.type(torch.FloatTensor)
         context_inputs = func(context_inputs)
+        print(context_inputs.shape)
  
         aspect_outputs = self.aspect_lstm.forward(aspect_inputs)
         aspect_outputs = torch.reshape(aspect_outputs, (1, aspect_outputs.shape[0], aspect_outputs.shape[1]))
