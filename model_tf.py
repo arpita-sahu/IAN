@@ -34,6 +34,7 @@ class IAN(tf.keras.Model):
     def call(self, data, dropout=0.5):
         print("INSIDE CALL")
         aspects, contexts, labels, aspect_lens, context_lens = data
+        print(aspects, contexts, aspect_lens, context_lens)
         aspect_inputs = tf.nn.embedding_lookup(self.embedding_matrix, aspects)
         aspect_inputs = tf.cast(aspect_inputs, tf.float32)
         aspect_inputs = tf.nn.dropout(aspect_inputs, keep_prob=dropout)
@@ -52,17 +53,17 @@ class IAN(tf.keras.Model):
                                                         tf.expand_dims(context_avg, -1)) + self.aspect_b),
                                    axis=1)
         aspect_rep = tf.reduce_sum(aspect_att * aspect_outputs, 1)
-        print("Aspect = ", aspect_rep, aspect_rep.shape)
+        #print("Aspect = ", aspect_rep, aspect_rep.shape)
         context_att = tf.nn.softmax(tf.nn.tanh(tf.einsum('ijk,kl,ilm->ijm', context_outputs, self.context_w,
                                                          tf.expand_dims(aspect_avg, -1)) + self.context_b),
                                     axis=1)
         context_rep = tf.reduce_sum(context_att * context_outputs, 1)
-        print("Aspect = ", context_rep, context_rep.shape)
+        #print("Aspect = ", context_rep, context_rep.shape)
         
         rep = tf.concat([aspect_rep, context_rep], 1)
-        print("test = ", self.max_aspect_len, self.embedding_dim, self.aspect_w.shape, self.aspect_b.shape, self.context_w.shape, self.context_b.shape)
-        print("\n\nREP = ", rep, "\n\nREP SHAPE = ", rep.shape)
+        #print("test = ", self.max_aspect_len, self.embedding_dim, self.aspect_w.shape, self.aspect_b.shape, self.context_w.shape, self.context_b.shape)
+        #print("\n\nREP = ", rep, "\n\nREP SHAPE = ", rep.shape)
         predict = self.output_fc(rep)
-        print("\n\nPREDICT = ",predict, "\n\nPREDICT SHAPE = ",predict.shape) 
+        #print("\n\nPREDICT = ",predict, "\n\nPREDICT SHAPE = ",predict.shape) 
 
         return predict, labels
