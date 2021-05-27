@@ -44,8 +44,9 @@ class IAN(tf.keras.Model):
         context_inputs = tf.nn.dropout(context_inputs, keep_prob=dropout)
         #print(context_inputs, context_inputs.shape)
         
+        print("SHAPE = ", self.embedding_dim, self.n_hidden, self.n_class)
         aspect_outputs = self.aspect_lstm(aspect_inputs)
-        print("ASPECT OUTPUT = ", aspect_outputs, aspect_outputs.shape)
+        #print("ASPECT OUTPUT = ", aspect_outputs, aspect_outputs.shape)
         aspect_avg = tf.reduce_mean(aspect_outputs, 1)
 
         context_outputs = self.context_lstm(context_inputs)
