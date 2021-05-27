@@ -38,18 +38,17 @@ class IAN(torch.nn.Module):
 
         aspect_inputs = torch.index_select(input = torch.tensor(self.embedding_matrix), dim = 0, index = aspects.long().flatten()) #return values of elements in embedding_matrix at indices given by aspects
         aspect_inputs = torch.reshape(aspect_inputs, (aspects.shape[0], aspects.shape[1], aspect_inputs.shape[1]))
-        print(aspect_inputs, aspect_inputs.shape)
         aspect_inputs = aspect_inputs.type(torch.FloatTensor) #converting tensor to float32 type 
-        print(aspect_inputs.shape)
         rate = 1 - dropout #dropout = keepprob
         func = torch.nn.Dropout(p=rate)
         aspect_inputs = func(aspect_inputs) #change some elements to 0 to reduce overfitting 
         print("INPUTS = \n", aspect_inputs.shape)
 
         context_inputs = torch.index_select(input = torch.tensor(self.embedding_matrix), dim = 0, index = contexts.long().flatten())
+        aspect_inputs = torch.reshape(aspect_inputs, (contexts.shape[0], contexts.shape[1], context_inputs.shape[1]))
         context_inputs = context_inputs.type(torch.FloatTensor)
         context_inputs = func(context_inputs)
-        print(context_inputs.shape)
+        print(context_inputs, context_inputs.shape)
  
         aspect_outputs = self.aspect_lstm.forward(aspect_inputs)
         aspect_outputs = torch.reshape(aspect_outputs, (1, aspect_outputs.shape[0], aspect_outputs.shape[1]))
