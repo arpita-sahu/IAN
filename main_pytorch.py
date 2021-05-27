@@ -64,7 +64,7 @@ def run(model, train_data, test_data):
   test_loader = DataLoader(test_dataset, batch_size = batch_size, shuffle = False, drop_last = True)
     
   #optimizer = torch.optim.Adam(model.config(), lr=learning_rate)
-  optimizer = torch.optim.Adam(lr = learning_rate)
+  optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
     
   for i in range(n_epoch):
     cost, predict_list, labels_list = 0., [], []
