@@ -37,7 +37,7 @@ class IAN(torch.nn.Module):
         print("Shapes = ", aspects.shape, contexts.shape, labels.shape, aspect_lens.shape, context_lens.shape)
 
         aspect_inputs = torch.index_select(input = torch.tensor(self.embedding_matrix), dim = 0, index = aspects.long().flatten()) #return values of elements in embedding_matrix at indices given by aspects
-        print(aspect_input, aspect_inputs.shape)
+        print(aspect_inputs, aspect_inputs.shape)
         aspect_inputs = aspect_inputs.type(torch.FloatTensor) #converting tensor to float32 type 
         print(aspect_inputs.shape)
         rate = 1 - dropout #dropout = keepprob
