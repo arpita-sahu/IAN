@@ -33,16 +33,17 @@ class IAN(tf.keras.Model):
 
     def call(self, data, dropout=0.5):
         print("INSIDE CALL")
-        aspects, contexts, labels, aspect_lens, context_lens = data
-        print(aspects, contexts, aspect_lens, context_lens)
+        #aspects, contexts, labels, aspect_lens, context_lens = data
+        #print(aspects, contexts, aspect_lens, context_lens)
         aspect_inputs = tf.nn.embedding_lookup(self.embedding_matrix, aspects)
         aspect_inputs = tf.cast(aspect_inputs, tf.float32)
         aspect_inputs = tf.nn.dropout(aspect_inputs, keep_prob=dropout)
-
+        print("INPUTS = \n", aspect_inputs.shape)
         context_inputs = tf.nn.embedding_lookup(self.embedding_matrix, contexts)
         context_inputs = tf.cast(context_inputs, tf.float32)
         context_inputs = tf.nn.dropout(context_inputs, keep_prob=dropout)
-
+        print(context_inputs.shape)
+        
         aspect_outputs = self.aspect_lstm(aspect_inputs)
         aspect_avg = tf.reduce_mean(aspect_outputs, 1)
 
